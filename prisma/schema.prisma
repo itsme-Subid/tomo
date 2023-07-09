@@ -40,11 +40,18 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
+  username      String    @unique
+  bio           String?
+  avatar        String?
+  karma         Int       @default(0)
   email         String?   @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  posts         Post[]
+  comments      Comment[]
+  upvotes       Upvote[]
 }
 
 model VerificationToken {
@@ -53,4 +60,45 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Post {
+  id        String    @id @default(cuid())
+  title     String
+  content   String
+  image     String?
+  upvotes   Upvote[]
+  published Boolean   @default(false)
+  postedAt  DateTime  @default(now())
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId  String
+  comments  Comment[]
+  tag       String
+
+  @@index([authorId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  published Boolean  @default(false)
+  postedAt  DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  post      Post?    @relation(fields: [postId], references: [id])
+  postId    String?
+
+  @@index([authorId])
+  @@index([postId])
+}
+
+model Upvote {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+  post   Post   @relation(fields: [postId], references: [id])
+  postId String
+
+  @@unique([userId, postId])
+  @@index([postId])
 }
