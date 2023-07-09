@@ -2,18 +2,24 @@
 
 import { prisma } from "@/server/db/prisma";
 
-export async function createPost(formData: FormData) {
-  if (!formData.get("image")) {
-    const post = await prisma.user.update({
-      where: {
-        id: formData.get("userId") as string,
-      },
-      data: {
-        posts: {
-          create: {
-            content: formData.get("content") as string,
-            tag: formData.get("tag") as string,
-          },
+export default async function createPost({
+  content,
+  image,
+  authorId,
+}: {
+  content: string;
+  image?: string;
+  authorId: string;
+}) {
+  const post = await prisma.user.update({
+    where: {
+      id: authorId,
+    },
+    data: {
+      posts: {
+        create: {
+          content,
+          image,
         },
       },
     });
