@@ -22,8 +22,10 @@ export default async function createPost({
           image,
         },
       },
-    },
-  });
+    });
 
-  return post;
+    return post;
+  }
+
+  
 }
