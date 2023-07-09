@@ -1,6 +1,11 @@
 "use server";
 
 import { prisma } from "@/server/db/prisma";
+import { UploadClient } from "@uploadcare/upload-client";
+
+const client = new UploadClient({
+  publicKey: process.env.UPLOAD_KEY as string,
+});
 
 export default async function createPost({
   content,
@@ -22,10 +27,8 @@ export default async function createPost({
           image,
         },
       },
-    });
+    },
+  });
 
-    return post;
-  }
-
-  
+  return post;
 }

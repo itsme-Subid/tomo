@@ -9,6 +9,7 @@ export async function getPostWithUserById(id: string) {
     },
     include: {
       author: true,
+      upvotes: true,
     },
   });
 
@@ -19,7 +20,11 @@ export async function getPostsWithUser() {
   const posts = await prisma.post.findMany({
     include: {
       author: true,
+      upvotes: true,
     },
+    orderBy: {
+      postedAt: "desc",
+    }
   });
 
   return posts;

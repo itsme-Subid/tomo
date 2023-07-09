@@ -4,12 +4,18 @@ import "@uploadthing/react/styles.css";
 import { UploadButton } from "@/app/utils/uploadthing";
 import { useState } from "react";
 import createPost from "@/server/actions/post/create";
+import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
+import { useRef } from "react";
 
 const CreatePost = ({ userID }: { userID: string }) => {
   const [image, setImage] = useState<string>("");
+  const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
   return (
     <form
       className="post flex-1"
+      ref={formRef}
       action={async (formData) => {
         try {
           await createPost({
@@ -17,8 +23,12 @@ const CreatePost = ({ userID }: { userID: string }) => {
             image,
             authorId: userID,
           });
+          formRef.current?.reset();
+          router.refresh();
+          
         } catch (error) {
           console.log(error);
+          formRef.current?.reset();
         }
       }}
     >
