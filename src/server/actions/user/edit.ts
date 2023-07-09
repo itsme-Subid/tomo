@@ -9,6 +9,10 @@ export async function changeUsername({
   userId: string;
   username: string;
 }) {
+  console.log({
+    userId,
+    username,
+  });
   const user = await prisma.user.update({
     where: {
       id: userId,

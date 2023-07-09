@@ -3,14 +3,12 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/server/db/prisma";
-import { generateFromEmail, generateUsername } from "unique-username-generator";
 
 export const config = {
   runtime: "nodejs",
 };
 
 export const authOptions: NextAuthOptions = {
-  // Include user.id on session
   callbacks: {
     session({ session, user }) {
       if (session.user) {
@@ -18,9 +16,7 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-},
-
-
+  },
 
   adapter: PrismaAdapter(prisma),
   providers: [
