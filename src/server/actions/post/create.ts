@@ -6,12 +6,10 @@ export default async function createPost({
   content,
   image,
   authorId,
-  tag,
 }: {
   content: string;
   image?: string;
   authorId: string;
-  tag: string;
 }) {
   const post = await prisma.user.update({
     where: {
@@ -22,7 +20,6 @@ export default async function createPost({
         create: {
           content,
           image,
-          tag,
         },
       },
     },
