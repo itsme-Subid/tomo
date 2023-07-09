@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { createPost } from "@/server/actions/post/create";
 import PostsComponent from "@/components/posts";
 import { getPostsWithUser } from "@/server/actions/post/get";
+import CreatePost from "./createPost";
 
 /* eslint-disable @next/next/no-img-element */
 const FeedPage = async () => {
@@ -65,6 +66,7 @@ const FeedPage = async () => {
               </button>
             </div>
           </form>
+          <CreatePost userID={session?.user?.id!} />
         </section>
       )}
       <PostsComponent posts={posts} />
