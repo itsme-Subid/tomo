@@ -3,13 +3,11 @@
 import { prisma } from "@/server/db/prisma";
 
 export default async function createPost({
-  title,
   content,
   image,
   authorId,
   tag,
 }: {
-  title: string;
   content: string;
   image?: string;
   authorId: string;
@@ -22,7 +20,6 @@ export default async function createPost({
     data: {
       posts: {
         create: {
-          title,
           content,
           image,
           tag,
