@@ -13,6 +13,11 @@
   margin-inline: auto;
 }
 
+.container-custom-xs {
+  width: min(100%, 45rem);
+  margin-inline: auto;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
