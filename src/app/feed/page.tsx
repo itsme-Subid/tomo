@@ -1,9 +1,14 @@
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
+import { createPost } from "@/server/actions/post/create";
+import PostsComponent from "@/components/posts";
+import { getPostsWithUser } from "@/server/actions/post/get";
 
 /* eslint-disable @next/next/no-img-element */
 const FeedPage = async () => {
+  const posts = await getPostsWithUser();
   const session = await getServerSession(authOptions);
+
   return (
     <main className="container-custom-xs px-4 lg:px-0">
       {session && (
@@ -13,7 +18,14 @@ const FeedPage = async () => {
             src={session?.user?.image as string}
             alt=""
           />
-          <form className="post flex-1">
+          <form
+            className="post flex-1"
+            action={async (formData) => {
+              "use server";
+              formData.append("userId", session?.user?.id as string);
+              await createPost(formData);
+            }}
+          >
             <textarea
               className="w-full mt-3 h-16 resize-none outline-none"
               placeholder="What's on your mind?"
@@ -55,6 +67,7 @@ const FeedPage = async () => {
           </form>
         </section>
       )}
+      <PostsComponent posts={posts} />
     </main>
   );
 };

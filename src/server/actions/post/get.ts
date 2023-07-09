@@ -9,6 +9,7 @@ export async function getPostWithUserById(id: string) {
     },
     include: {
       author: true,
+      upvotes: true,
     },
   });
 

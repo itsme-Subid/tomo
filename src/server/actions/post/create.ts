@@ -1,6 +1,11 @@
 "use server";
 
 import { prisma } from "@/server/db/prisma";
+import { UploadClient } from "@uploadcare/upload-client";
+
+const client = new UploadClient({
+  publicKey: process.env.UPLOAD_KEY as string,
+});
 
 export async function createPost(formData: FormData) {
   if (!formData.get("image")) {
@@ -21,5 +26,10 @@ export async function createPost(formData: FormData) {
     return post;
   }
 
-  
+
+  console.log(formData.get("image"))
+
+  const image = await client.uploadFile();
+
+  console.log(image.cdnUrl);
 }

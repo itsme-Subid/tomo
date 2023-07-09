@@ -20,7 +20,7 @@ const ProfileDetails = async ({ user }: { user: UserWithEverything }) => {
               user.image ||
               `https://avatars.dicebear.com/api/avataaars/${user.name}.svg`
             }
-            className="rounded-full"
+            className="rounded-full w-20 h-20"
             alt=""
           />
           <div className="wrapper flex flex-1 items-center">
