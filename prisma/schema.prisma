@@ -40,9 +40,8 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
-  username      String?    @unique
+  username      String?   @unique
   bio           String?
-  avatar        String?
   karma         Int       @default(0)
   email         String?   @unique
   emailVerified DateTime?
@@ -52,6 +51,8 @@ model User {
   posts         Post[]
   comments      Comment[]
   upvotes       Upvote[]
+  followers     User[]    @relation("FollowRelation")
+  following     User[]    @relation("FollowRelation")
 }
 
 model VerificationToken {
@@ -64,7 +65,6 @@ model VerificationToken {
 
 model Post {
   id        String    @id @default(cuid())
-  title     String
   content   String
   image     String?
   upvotes   Upvote[]
