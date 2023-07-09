@@ -5,7 +5,7 @@ type PostWithAuthor = Prisma.PostGetPayload<{
   include: { author: true };
 }>;
 
-export default function PostComponent({ post }: { post: PostWithAuthor }) {
+const PostComponent = ({ post }: { post: PostWithAuthor }) => {
   return (
     <div className="flex flex-col gap-2 p-2 w-full max-h-max">
       <div className=" flex gap-2">
@@ -27,4 +27,6 @@ export default function PostComponent({ post }: { post: PostWithAuthor }) {
       <div className="flex gap-2 pl-10"></div>
     </div>
   );
-}
+};
+
+export default PostComponent;
