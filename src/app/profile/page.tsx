@@ -1,14 +1,13 @@
-import { changeUsername } from "@/server/actions/user/edit";
 import usernameExists from "@/server/actions/user/check";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
-import { useRef } from "react";
-import UsernameForm from "./form";
+import UsernameForm from "../../components/usernameForm";
+import ProfileDetails from "@/components/profileDetails";
+import { getUser } from "@/server/actions/user/get";
 
-export default async function ProfilePage() {
+const ProfilePage = async () => {
   const session = await getServerSession(authOptions);
-
+  const user = await getUser({ userId: session?.user?.id as string });
   if (!session?.user) {
     return <p>Not signed in</p>;
   }
@@ -17,8 +16,10 @@ export default async function ProfilePage() {
     userId: session.user.id,
   });
 
-  if (ue) {
-    return <p>Username already exists</p>;
+  console.log({ ue, userid: session.user.id });
+
+  if (ue && user) {
+    return <ProfileDetails user={user} />;
   }
 
   return (
@@ -26,4 +27,5 @@ export default async function ProfilePage() {
       <UsernameForm session={session} />
     </main>
   );
-}
+};
+export default ProfilePage;
