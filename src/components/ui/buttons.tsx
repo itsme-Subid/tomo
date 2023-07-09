@@ -3,14 +3,11 @@
 
 import { signIn, signOut } from "next-auth/react";
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
-import usernameExists from "@/server/actions/user/check";
-import { changeUsername } from "@/server/actions/user/edit";
-import { generateFromEmail, generateUsername } from "unique-username-generator";
 
 export const SignOut = () => {
   return (
     <DropdownMenuItem
-      className="cursor-pointer outline-none focus:ring-1 ring-zinc-300 rounded-sm px-1 py-1"
+      className="cursor-pointer select-none outline-none focus:ring-1 ring-zinc-300 rounded-sm p-2"
       onClick={() => signOut()}
     >
       Sign Out
@@ -21,15 +18,16 @@ export const SignOut = () => {
 export const GitHubSignIn = () => {
   return (
     <DropdownMenuItem
-      className="cursor-pointer outline-none focus:ring-1 ring-zinc-300 rounded-sm "
-      onClick={() => {
-        signIn("github");
-        
-      }}
+      className="cursor-pointer select-none outline-none focus:ring-1 ring-zinc-300 rounded-sm"
+      onClick={() =>
+        signIn("github", {
+          callbackUrl: "/profile",
+        })
+      }
     >
-      <div className="flex gap-2 px-1 py-1">
-        <img className="w-4 h-4" src="/icon/github.svg" alt="" />
-        <span>Profile</span>
+      <div className="flex gap-2 p-2">
+        <img className="w-6 h-6" src="/icon/github.svg" alt="" />
+        <span>Github</span>
       </div>
     </DropdownMenuItem>
   );
@@ -38,12 +36,16 @@ export const GitHubSignIn = () => {
 export const GoogleSignIn = () => {
   return (
     <DropdownMenuItem
-      className="cursor-pointer outline-none focus:ring-1 ring-zinc-300 rounded-sm px-1 py-1"
-      onClick={() => signIn("google")}
+      className="cursor-pointer outline-none focus:ring-1 ring-zinc-300 rounded-sm"
+      onClick={() =>
+        signIn("google", {
+          callbackUrl: "/profile",
+        })
+      }
     >
-      <div className="flex gap-2 ">
-        <img className="w-4" src="/icon/google.svg" alt="" />
-        <span>Settings</span>
+      <div className="flex gap-2 p-2">
+        <img className="w-6 h-6" src="/icon/google.svg" alt="" />
+        <span>Google</span>
       </div>
     </DropdownMenuItem>
   );
