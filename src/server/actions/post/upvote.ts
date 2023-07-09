@@ -84,3 +84,22 @@ export async function removeKarma({ userId }: { userId: string }) {
 
   return user;
 }
+
+export async function hasUpvoted({
+  postId,
+  userId,
+}: {
+  postId: string;
+  userId: string;
+}) {
+  const upvote = await prisma.upvote.findUnique({
+    where: {
+      userId_postId: {
+        userId,
+        postId,
+      },
+    },
+  });
+
+  return !!upvote;
+}

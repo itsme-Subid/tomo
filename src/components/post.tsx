@@ -21,8 +21,17 @@ const PostComponent = ({ post }: { post: PostWithAuthor }) => {
           </span>
         </div>
       </div>
-      <div className="flex pl-10">
+      <div className="flex flex-col gap-1 pl-10">
         <p>{post.content}</p>
+        {post.image && (
+          <img
+
+            src={post.image as string}
+            alt="post"
+            className="w-full h-full object-cover"
+          />
+
+        )}
       </div>
       <div className="flex gap-2 pl-10">
 

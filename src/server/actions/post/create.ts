@@ -27,15 +27,8 @@ export default async function createPost({
           image,
         },
       },
-    });
+    },
+  });
 
-    return post;
-  }
-
-
-  console.log(formData.get("image"))
-
-  const image = await client.uploadFile();
-
-  console.log(image.cdnUrl);
+  return post;
 }
