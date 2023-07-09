@@ -4,14 +4,6 @@ import { signIn } from "next-auth/react";
 
 const Home = () => {
   return (
-    <>
-      <Content />
-    </>
-  );
-};
-
-const Content = () => {
-  return (
     <main>
       <div className="container-custom-md min-h-screen px-4 py-2 flex flex-col lg:flex-row items-center justify-center lg:gap-8">
         <div className="content">
