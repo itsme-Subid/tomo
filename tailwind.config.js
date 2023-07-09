@@ -7,6 +7,10 @@ module.exports = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
 	],
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -16,6 +20,20 @@ module.exports = {
       },
     },
     extend: {
+<<<<<<< HEAD
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      fontFamily: {
+        sans: ["Satoshi", "sans-serif"],
+      },
+    },
+  },
+  plugins: [],
+};
+=======
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -74,3 +92,4 @@ module.exports = {
   },
   plugins: [require("tailwindcss-animate")],
 }
+>>>>>>> 7b8b21b7eddba4009544b3227e4b9b4c3c938a84
