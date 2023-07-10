@@ -5,11 +5,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import deletePost from "@/server/actions/post/delete";
 import DeleteButton from "./deleteButton";
-import {
-  addUpvote,
-  hasUpvoted,
-  removeUpvote,
-} from "@/server/actions/post/upvote";
 import TimeFormatter from "./timeFormatter";
 
 type PostWithAuthor = Prisma.PostGetPayload<{
