@@ -21,16 +21,16 @@ const Header = ({ session }: { session?: Session | null }) => {
         }}
       >
         <div className="logo">
-          <Link className="text-xl text-zinc-600 font-semibold" href={"/"}>
-            Tomo
+          <Link className="text-xl text-rose-600 font-bold" href={"/"}>
+            tomo
           </Link>
         </div>
         {!session?.user ? (
           <DropdownMenu>
-            <DropdownMenuTrigger className="border-primary border py-2 px-5 rounded-lg hover:bg-primary/30 transition-all duration-300 ease-in-out flex gap-2 items-center group">
-              Sign in{" "}
+            <DropdownMenuTrigger className="border-primary border text-center py-2 px-5 rounded-lg hover:bg-primary/30 transition-all duration-300 ease-in-out flex gap-2 items-center group">
+              Sign in
               <img
-                className="w-0 transition-all ease-in-out group-hover:w-4"
+                className="w-0 hidden transition-all ease-in-out group-hover:block group-hover:w-4"
                 src="/icon/right.svg"
                 alt=""
               />

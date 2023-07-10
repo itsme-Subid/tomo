@@ -83,7 +83,21 @@ const ProfileDetails = async ({ user }: { user: UserWithEverything }) => {
           </div>
         </div>
       </section>
-      <PostsComponent posts={user.posts} />
+      {user.posts.length > 0 ? (
+        <PostsComponent posts={user.posts} />
+      ) : (
+        <div className="flex flex-col gap-2 items-center justify-center h-full mt-4">
+          <h2 className="font-bold text-2xl">
+            You {`haven't`} posted anything yet!
+          </h2>
+          <Link
+            href={"/feed"}
+            className="px-4 py-3 bg-zinc-300/50 hover:bg-zinc-300/90 duration-300 rounded-lg"
+          >
+            Create Post
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
