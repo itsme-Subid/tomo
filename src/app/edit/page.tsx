@@ -17,6 +17,7 @@ const EditPage = async () => {
           "use server";
           formData.append("userId", session?.user?.id as string);
           await editMultiple({ formData });
+          redirect("/profile");
         }}
         className="flex flex-col gap-4 border border-gray-300 rounded-md p-8 shadow min-w-[90vw] lg:min-w-[40vw]"
       >
@@ -58,7 +59,7 @@ const EditPage = async () => {
           type="submit"
           className="bg-primary w-fit py-2 px-6 rounded-md text-white flex gap-2 items-center justify-center"
         >
-          <span>Apply</span>
+          Apply
         </button>
       </form>
     </div>
