@@ -6,6 +6,7 @@ const Leaderboard = async () => {
   return (
     <div className="container-custom-xs py-8 px-4 lg:px-0">
       <h1 className="text-2xl font-semibold">Leaderboard</h1>
+      <p>Top 10 users with the most tomo points!</p>
       <ul className="flex flex-col gap-4 my-8">
         {users.map((user, index) => {
           return (
@@ -15,12 +16,12 @@ const Leaderboard = async () => {
                   user.image ||
                   `https://avatars.dicebear.com/api/avataaars/${user.name}.svg`
                 }
-                className="rounded-full w-14 h-14"
+                className="rounded-full w-12 h-12"
                 alt=""
               />
               <div className="wrapper flex flex-1 items-center">
                 <div className="left">
-                  <h1 className="text-2xl font-bold">{user.name}</h1>
+                  <h1 className="text-xl font-semibold leading-none">{user.name}</h1>
                   <p className="text-gray-500">@{user.username}</p>
                 </div>
                 <div className="right ml-auto">

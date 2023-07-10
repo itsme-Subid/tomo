@@ -1,4 +1,7 @@
+"use server";
+
 import { prisma } from "@/server/db/prisma";
+import { revalidatePath } from "next/cache";
 
 export async function followUser({
   userId,
@@ -17,6 +20,8 @@ export async function followUser({
       },
     },
   });
+
+  revalidatePath(`/user/${follow.username}`);
 
   return follow;
 }
@@ -38,6 +43,8 @@ export async function UnfollowUser({
       },
     },
   });
+
+  revalidatePath(`/user/${unfollow.username}`);
 
   return unfollow;
 }
