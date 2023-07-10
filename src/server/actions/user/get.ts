@@ -29,10 +29,26 @@ export async function getUser({ userId }: { userId: string }) {
         },
         orderBy: {
           postedAt: "desc",
-        }
+        },
       },
     },
   });
 
   return user;
+}
+
+export async function getUserKarma() {
+  const users = await prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      username: true,
+      image: true,
+      karma: true,
+    },
+    orderBy: {
+      karma: "desc",
+    },
+  });
+  return users;
 }

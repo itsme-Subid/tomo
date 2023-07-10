@@ -62,11 +62,11 @@ export default function UpvoteComponent({
     };
 
     return (
-      <div className="flex gap-2 pl-10">
+      <div className="flex gap-2">
         {upvoted ? (
           <button
             onClick={handleRemoveUpvote}
-            className="flex items-center gap-1 text-xs text-gray-400"
+            className="flex items-center cursor-pointer gap-1 text-xs text-zinc-700"
             disabled={pending}
           >
             <svg
@@ -82,11 +82,12 @@ export default function UpvoteComponent({
               />
             </svg>
             <span>Upvoted</span>
+            <span className="text-xs text-zinc-700">{upvoteCount}</span>
           </button>
         ) : (
           <button
             onClick={handleUpvote}
-            className="flex items-center gap-1 text-xs text-gray-400"
+            className="flex items-center cursor-pointer gap-1 text-xs text-zinc-700"
             disabled={pending}
           >
             <svg
@@ -102,9 +103,9 @@ export default function UpvoteComponent({
               />
             </svg>
             <span>Upvote</span>
+            <span className="text-xs text-zinc-700">{upvoteCount}</span>
           </button>
         )}
-        <span className="text-xs text-gray-400">{upvoteCount}</span>
       </div>
     );
   }

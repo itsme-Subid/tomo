@@ -16,7 +16,7 @@ type UserWithEverything = Prisma.UserGetPayload<{
 const ProfileDetails = async ({ user }: { user: UserWithEverything }) => {
   return (
     <div className="container-custom-xs px-4 lg:px-0">
-      <section className="flex flex-col gap-2 border-b border-border py-8">
+      <section className="flex flex-col gap-2 border-b border-zinc-400 py-8">
         <div className="flex items-center gap-4">
           <img
             src={
@@ -57,9 +57,15 @@ const ProfileDetails = async ({ user }: { user: UserWithEverything }) => {
         <div className="bio flex w-full">
           <p>{user.bio}</p>
         </div>
-        <div className="reputation flex gap-4 items-center">
-          <button className="px-4 py-2 bg-zinc-300 rounded-md">Follow</button>
-          <p>
+        <div className="reputation border-between flex items-center">
+          {/* <button className="px-4 py-2 bg-zinc-300 rounded-md">Follow</button> */}
+          <p className="pr-2">
+            <span>{user.followers.length}</span> Followers
+          </p>
+          <p className="px-2">
+            <span>{user.following.length}</span> Following
+          </p>
+          <p className="pl-2">
             <span>{user.karma}</span> Tomo Points
           </p>
         </div>
