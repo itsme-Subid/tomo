@@ -3,7 +3,6 @@ import { getUserByUsername } from "@/server/actions/user/get";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { redirect } from "next/navigation";
 import ProfileDetails from "@/components/profileDetails";
-import FollowComponent from "@/components/follow";
 
 export default async function ProfilePage({
   params,
@@ -23,20 +22,8 @@ export default async function ProfilePage({
   }
 
   if (user.id === session?.user?.id) {
-    return (
-      <ProfileDetails
-        user={user}
-        userPage={true}
-        currentUser={user.id === session?.user?.id}
-      />
-    );
+    return <ProfileDetails user={user} />;
   }
 
-  return (
-    <ProfileDetails
-      user={user}
-      userPage={true}
-      currentUser={user.id === session?.user?.id}
-    />
-  );
+  return <ProfileDetails user={user} />;
 }

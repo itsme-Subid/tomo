@@ -19,7 +19,7 @@ const ProfilePage = async () => {
   });
 
   if (ue && user) {
-    return <ProfileDetails user={user} userPage={false} />;
+    return <ProfileDetails user={user} />;
   }
 
   return (
