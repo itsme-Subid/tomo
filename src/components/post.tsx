@@ -1,40 +1,86 @@
 /* eslint-disable @next/next/no-img-element */
 import { Prisma } from "@prisma/client";
 
+import deletePost from "@/server/actions/post/delete";
+import DeleteButton from "./deleteButton";
+import LikeButton from "./likeButton";
+import {
+  addUpvote,
+  hasUpvoted,
+  removeUpvote,
+} from "@/server/actions/post/upvote";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import TimeFormatter from "./timeFormatter";
+
 type PostWithAuthor = Prisma.PostGetPayload<{
-  include: { author: true, upvotes: true };
+  include: { author: true; upvotes: true };
 }>;
 
-const PostComponent = ({ post }: { post: PostWithAuthor }) => {
+const PostComponent = async ({ post }: { post: PostWithAuthor }) => {
+  const session = await getServerSession(authOptions);
+  const handleDelete: () => Promise<void> = async () => {
+    "use server";
+    await deletePost({ postId: post.id });
+  };
+  const isLiked = await hasUpvoted({
+    postId: post.id,
+    userId: session?.user?.id as string,
+  });
+  const handleLike = async () => {
+    "use server";
+    await addUpvote({
+      postId: post.id,
+      userId: session?.user?.id as string,
+    });
+  };
+  const handleDislike = async () => {
+    "use server";
+    await removeUpvote({
+      postId: post.id,
+      userId: session?.user?.id as string,
+    });
+  };
   return (
-    <div className="flex flex-col gap-2 p-2 w-full max-h-max">
+    <div className="flex flex-col gap-2 py-4 px-2 w-full max-h-max">
       <div className=" flex gap-2">
         <img
           src={post.author.image as string}
           alt={"avatar"}
           className="w-8 h-8 rounded-full"
         />
-        <div className="flex flex-col gap-1">
-          <span className="font-semibold leading-none">{post.author.name}</span>
-          <span className="text-xs text-gray-400">
-            {post.postedAt.toLocaleString()}
-          </span>
+        <div className="flex justify-between w-full">
+          <div className="left flex flex-col gap-1">
+            <span className="font-semibold leading-none">
+              {post.author.name}
+            </span>
+            <span className="text-xs text-gray-400">
+              <TimeFormatter date={post.postedAt} />
+            </span>
+          </div>
+          <div className="right">
+            {post.authorId === session?.user?.id && (
+              <DeleteButton handleDelete={handleDelete} />
+            )}
+          </div>
         </div>
       </div>
       <div className="flex flex-col gap-1 pl-10">
         <p>{post.content}</p>
         {post.image && (
           <img
-
             src={post.image as string}
             alt="post"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-md"
           />
-
         )}
       </div>
       <div className="flex gap-2 pl-10">
-
+        <LikeButton
+          isLiked={isLiked}
+          handleLike={handleLike}
+          handleDislike={handleDislike}
+        />
       </div>
     </div>
   );
