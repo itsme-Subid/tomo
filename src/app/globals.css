@@ -18,6 +18,13 @@
   margin-inline: auto;
 }
 
+.border-between {
+  & > *:not(:last-child) {
+    border-right: 1px solid;
+    @apply border-zinc-400;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
