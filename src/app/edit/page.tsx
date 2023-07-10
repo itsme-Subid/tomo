@@ -17,7 +17,6 @@ const EditPage = async () => {
           "use server";
           formData.append("userId", session?.user?.id as string);
           await editMultiple({ formData });
-          redirect("/profile");
         }}
         className="flex flex-col gap-4 border border-gray-300 rounded-md p-8 shadow min-w-[90vw] lg:min-w-[40vw]"
       >
