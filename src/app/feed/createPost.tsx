@@ -112,6 +112,7 @@ const CreatePost = ({ userID }: { userID: string }) => {
         </div>
         <button
           type="submit"
+          disabled={isUploading}
           className="px-6 w-fit ml-auto py-2 bg-primary text-white rounded-full"
         >
           Post

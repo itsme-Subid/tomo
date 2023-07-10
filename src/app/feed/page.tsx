@@ -9,7 +9,7 @@ const FeedPage = async () => {
   const session = await getServerSession(authOptions);
   const posts = await getPostsWithUser();
   return (
-    <main className="container-custom-xs px-4 lg:px-0">
+    <main className="container-custom-xs px-4 lg:px-0 pb-16">
       {session && (
         <section className="create-post py-8 flex gap-4 border-b border-border">
           <img
