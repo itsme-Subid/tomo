@@ -18,7 +18,6 @@ type UserWithEverything = Prisma.UserGetPayload<{
 
 const ProfileDetails = async ({ user }: { user: UserWithEverything }) => {
   const session = await getServerSession(authOptions);
-  console.log(session?.user?.id === user.id);
   return (
     <div className="container-custom-xs px-4 lg:px-0">
       <section className="flex flex-col gap-2 border-b border-zinc-400 pt-8 pb-4">
@@ -39,7 +38,7 @@ const ProfileDetails = async ({ user }: { user: UserWithEverything }) => {
             {session?.user?.id === user.id ? (
               <Link
                 className="self-start ml-auto p-2 hover:bg-zinc-200 rounded-full"
-                href={"/setting"}
+                href={"/edit"}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

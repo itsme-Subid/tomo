@@ -19,7 +19,7 @@ const PostComponent = async ({ post }: { post: PostWithAuthor }) => {
     await deletePost({ postId: post.id });
   };
   return (
-    <div className="flex flex-col gap-2 py-4 px-2 w-full max-h-max">
+    <li className="flex flex-col gap-2 py-4 px-2 w-full max-h-max">
       <div className=" flex gap-2">
         <Link href={`/user/${post.author.username}`} className="w-10 h-10">
           <img
@@ -57,7 +57,7 @@ const PostComponent = async ({ post }: { post: PostWithAuthor }) => {
       <div className="flex gap-2 ml-10 justify-center text-center py-2 px-4 rounded-full bg-zinc-200/40 hover:bg-zinc-200/80 transition-colors duration-300 w-fit">
         <UpvoteComponent post={post} session={session} />
       </div>
-    </div>
+    </li>
   );
 };
 
