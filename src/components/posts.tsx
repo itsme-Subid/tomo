@@ -7,10 +7,10 @@ type PostWithAuthor = Prisma.PostGetPayload<{
 
 export default function PostsComponent({ posts }: { posts: PostWithAuthor[] }) {
   return (
-    <section className="w-full flex flex-col divide-y ">
+    <ul className="w-full flex flex-col divide-y min-h-screen">
       {posts.map((post) => (
         <PostComponent key={post.id} post={post} />
       ))}
-    </section>
+    </ul>
   );
 }

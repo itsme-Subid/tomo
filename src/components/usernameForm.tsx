@@ -5,7 +5,6 @@ import { experimental_useFormStatus as useFormStatus } from "react-dom";
 import type { Session } from "next-auth";
 import { useRouter } from "next/navigation";
 import { updateUsername } from "@/server/actions/user/userName";
-import { twMerge } from "tailwind-merge";
 
 export default function UsernameForm({ session }: { session: Session | null }) {
   const formRef = useRef<HTMLFormElement>(null);
@@ -19,9 +18,9 @@ export default function UsernameForm({ session }: { session: Session | null }) {
         formData.append("userId", session?.user?.id ?? "");
         try {
           await updateUsername(formData);
-          router.refresh();
-        } catch (e) {
           formRef.current?.reset();
+          router.push("/profile");
+        } catch (e) {
           console.log(e);
         }
       }}
@@ -42,7 +41,7 @@ export default function UsernameForm({ session }: { session: Session | null }) {
         disabled={pending}
         className="bg-primary w-fit py-2 px-6 rounded-md text-white flex gap-2 items-center justify-center"
       >
-        <span>Apply</span>
+        Apply
       </button>
     </form>
   );

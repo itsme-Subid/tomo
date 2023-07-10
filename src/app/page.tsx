@@ -22,7 +22,7 @@ const Home = () => {
                 });
               }}
             >
-              <img className="w-6 h-6" src="/icon/github.svg" alt="" />
+              <img className="w-6 h-6" src="/icon/google.svg" alt="" />
               <span>Continue With Google</span>
             </button>
             <button
@@ -33,7 +33,7 @@ const Home = () => {
                 });
               }}
             >
-              <img className="w-6 h-6" src="/icon/google.svg" alt="" />
+              <img className="w-6 h-6" src="/icon/github.svg" alt="" />
               <span>Continue With Github</span>
             </button>
           </div>
