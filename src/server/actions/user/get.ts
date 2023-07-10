@@ -1,18 +1,4 @@
 import { prisma } from "@/server/db/prisma";
-import { Prisma } from "@prisma/client";
-
-type UserWithEverything = Prisma.UserGetPayload<{
-  include: {
-    followers: true;
-    following: true;
-    posts: {
-      include: {
-        upvotes: true;
-        author: true;
-      };
-    };
-  };
-}>;
 
 export async function getUser({ userId }: { userId: string }) {
   const user = await prisma.user.findUnique({
@@ -73,6 +59,21 @@ export async function getUserKarma() {
       karma: "desc",
     },
     take: 10,
+  });
+  return users;
+}
+
+export async function getOnlyUser(id: string) {
+  const users = await prisma.user.findUnique({
+    where: {
+      id,
+    },
+    select: {
+      id: true,
+      name: true,
+      username: true,
+      bio: true,
+    },
   });
   return users;
 }

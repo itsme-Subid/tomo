@@ -24,11 +24,19 @@ export default async function ProfilePage({
 
   if (user.id === session?.user?.id) {
     return (
-      <main className="min-h-screen flex items-center justify-center">
-        <p>My profile</p>
-      </main>
+      <ProfileDetails
+        user={user}
+        userPage={true}
+        currentUser={user.id === session?.user?.id}
+      />
     );
   }
 
-  return <ProfileDetails user={user} userPage={true} currentUser={user.id === session?.user?.id} />;
+  return (
+    <ProfileDetails
+      user={user}
+      userPage={true}
+      currentUser={user.id === session?.user?.id}
+    />
+  );
 }

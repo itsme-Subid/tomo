@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -15,7 +15,6 @@
     "@types/node": "20.4.1",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
-    "@uploadcare/upload-client": "^6.6.1",
     "@uploadthing/react": "^5.1.0",
     "autoprefixer": "10.4.14",
     "class-variance-authority": "^0.6.1",

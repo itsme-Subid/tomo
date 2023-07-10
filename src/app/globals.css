@@ -21,7 +21,7 @@
 .border-between {
   & > *:not(:last-child) {
     border-right: 1px solid;
-    @apply border-zinc-400;
+    border-color: rgb(161 161 170);
   }
 }
 
@@ -42,7 +42,7 @@
     --card: 0 0% 100%;
     --card-foreground: 222.2 47.4% 11.2%;
 
-    --primary: 350.21deg 90.48% 58.82%;
+    --primary: 351.3deg 94.52% 71.37%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;

@@ -6,10 +6,9 @@ import ProfileDetails from "@/components/profileDetails";
 import { getUser } from "@/server/actions/user/get";
 import { redirect } from "next/navigation";
 
-
 const ProfilePage = async () => {
   const session = await getServerSession(authOptions);
-  
+
   if (!session?.user) {
     return redirect("/");
   }
