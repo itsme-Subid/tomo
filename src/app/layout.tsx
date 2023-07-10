@@ -1,9 +1,9 @@
 import Header from "@/components/header";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,6 +19,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans">
+        <Toaster />
         <Header session={session} />
         {children}
       </body>

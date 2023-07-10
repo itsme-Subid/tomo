@@ -45,7 +45,10 @@ const ProfileDetails = async ({
             </div>
             {!userPage ||
               (currentUser && (
-                <Link className="self-start ml-auto" href={"/setting"}>
+                <Link
+                  className="self-start ml-auto p-2 hover:bg-zinc-200 rounded-full"
+                  href={"/setting"}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
