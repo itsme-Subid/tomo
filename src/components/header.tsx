@@ -58,7 +58,7 @@ const Header = ({ session }: { session?: Session | null }) => {
               </div>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="cursor-pointer outline-none hover:bg-zinc-200 rounded-sm">
-                <Link href={"/edit"} className="flex gap-2 p-2">
+                <Link href={"/edit"} className="flex gap-2 p-2 w-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

@@ -58,7 +58,7 @@ export default function FollowComponent({
     };
 
     return (
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center ml-auto">
         {following ? (
           <button
             className="px-6 w-fit ml-auto py-2 bg-primary text-white rounded-full"
