@@ -5,8 +5,10 @@ import UsernameForm from "../../components/usernameForm";
 import ProfileDetails from "@/components/profileDetails";
 import { getUser } from "@/server/actions/user/get";
 
+
 const ProfilePage = async () => {
   const session = await getServerSession(authOptions);
+  
   if (!session?.user) {
     return <p>Not signed in</p>;
   }
