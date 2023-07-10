@@ -51,7 +51,7 @@ const PostComponent = async ({ post }: { post: PostWithAuthor }) => {
           />
         )}
       </div>
-      <div className="flex gap-2 pl-10">
+      <div className="flex gap-2 ml-10 justify-center text-center py-2 px-4 rounded-full bg-zinc-200/40 hover:bg-zinc-200/80 transition-colors duration-300 w-fit">
         <UpvoteComponent post={post} session={session} />
       </div>
     </div>
