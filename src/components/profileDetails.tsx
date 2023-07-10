@@ -85,7 +85,7 @@ const ProfileDetails = async ({ user }: { user: UserWithEverything }) => {
       {user.posts.length > 0 ? (
         <PostsComponent posts={user.posts} />
       ) : (
-        <div className="flex flex-col gap-2 items-center justify-center h-full mt-4">
+        <div className="flex flex-col gap-2 items-center justify-center min-h-screen mt-4">
           <h2 className="font-bold text-2xl">
             You {`haven't`} posted anything yet!
           </h2>
