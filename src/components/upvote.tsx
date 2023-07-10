@@ -9,6 +9,7 @@ import {
 import type { Session } from "next-auth";
 import { Prisma } from "@prisma/client";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 type PostWithAuthor = Prisma.PostGetPayload<{
   include: { author: true; upvotes: true };
@@ -32,9 +33,16 @@ export default function UpvoteComponent({
     return null;
   } else {
     const handleUpvote = async () => {
+      setPending(true);
+      if (post.authorId === session?.user?.id) {
+        toast.error("You can't upvote your own post!", {
+          position: "bottom-right"
+        });
+        setPending(false);
+        return;
+      }
       setUpvoteCount(upvoteCount + 1);
 
-      setPending(true);
       const upvote = await addUpvote({
         postId: post.id,
         userId: session?.user?.id as string,
@@ -48,8 +56,16 @@ export default function UpvoteComponent({
     };
 
     const handleRemoveUpvote = async () => {
-      setUpvoteCount(upvoteCount - 1);
       setPending(true);
+      if (post.authorId === session?.user?.id) {
+        toast.error("You can't downvote your own post!", {
+          position: "bottom-right"
+        });
+        setPending(false);
+        return;
+      }
+      setUpvoteCount(upvoteCount - 1);
+
       const upvote = await removeUpvote({
         postId: post.id,
         userId: session.user?.id as string,
