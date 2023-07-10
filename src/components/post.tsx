@@ -1,11 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import { Prisma } from "@prisma/client";
+import UpvoteComponent from "./upvote";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 type PostWithAuthor = Prisma.PostGetPayload<{
   include: { author: true, upvotes: true };
 }>;
 
-const PostComponent = ({ post }: { post: PostWithAuthor }) => {
+const PostComponent = async ({ post }: { post: PostWithAuthor }) => {
+  const session = await getServerSession(authOptions);
   return (
     <div className="flex flex-col gap-2 p-2 w-full max-h-max">
       <div className=" flex gap-2">
@@ -34,7 +38,7 @@ const PostComponent = ({ post }: { post: PostWithAuthor }) => {
         )}
       </div>
       <div className="flex gap-2 pl-10">
-
+        <UpvoteComponent post={post} session={session} />
       </div>
     </div>
   );

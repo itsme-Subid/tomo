@@ -1,10 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import { Prisma } from "@prisma/client";
 import Link from "next/link";
+import PostsComponent from "@/components/posts";
 
 type UserWithEverything = Prisma.UserGetPayload<{
   include: {
-    posts: true;
+    posts: {
+      include: { author: true; upvotes: true };
+    };
     followers: true;
     following: true;
   };
@@ -61,6 +64,7 @@ const ProfileDetails = async ({ user }: { user: UserWithEverything }) => {
           </p>
         </div>
       </section>
+      <PostsComponent posts={user.posts} />
     </div>
   );
 };
