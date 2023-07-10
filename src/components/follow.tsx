@@ -6,14 +6,14 @@ import { Prisma } from "@prisma/client";
 import type { Session } from "next-auth";
 
 type UserWithEverything = Prisma.UserGetPayload<{
-    include: {
-      posts: {
-        include: { author: true; upvotes: true };
-      };
-      followers: true;
-      following: true;
+  include: {
+    posts: {
+      include: { author: true; upvotes: true };
     };
-  }>;
+    followers: true;
+    following: true;
+  };
+}>;
 
 export default function FollowComponent({
   user,
@@ -61,7 +61,7 @@ export default function FollowComponent({
       <div className="flex flex-col items-center">
         {following ? (
           <button
-            className="text-sm text-gray-400 hover:text-gray-500"
+            className="px-6 w-fit ml-auto py-2 bg-primary text-white rounded-full"
             onClick={handleUnfollow}
             disabled={pending}
           >
@@ -69,7 +69,7 @@ export default function FollowComponent({
           </button>
         ) : (
           <button
-            className="text-sm text-gray-400 hover:text-gray-500"
+            className="px-6 w-fit ml-auto py-2 bg-primary text-white rounded-full"
             onClick={handleFollow}
             disabled={pending}
           >
