@@ -4,13 +4,14 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import UsernameForm from "../../components/usernameForm";
 import ProfileDetails from "@/components/profileDetails";
 import { getUser } from "@/server/actions/user/get";
+import { redirect } from "next/navigation";
 
 
 const ProfilePage = async () => {
   const session = await getServerSession(authOptions);
   
   if (!session?.user) {
-    return <p>Not signed in</p>;
+    return redirect("/");
   }
   const user = await getUser({ userId: session?.user?.id as string });
 
@@ -19,7 +20,7 @@ const ProfilePage = async () => {
   });
 
   if (ue && user) {
-    return <ProfileDetails user={user} />;
+    return <ProfileDetails user={user} userPage={false} />;
   }
 
   return (
