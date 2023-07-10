@@ -37,6 +37,29 @@ export async function getUser({ userId }: { userId: string }) {
   return user;
 }
 
+export async function getUserByUsername(username: string) {
+  const user = await prisma.user.findUnique({
+    where: {
+      username,
+    },
+    include: {
+      followers: true,
+      following: true,
+      posts: {
+        include: {
+          upvotes: true,
+          author: true,
+        },
+        orderBy: {
+          postedAt: "desc",
+        },
+      },
+    },
+  });
+
+  return user;
+}
+
 export async function getUserKarma() {
   const users = await prisma.user.findMany({
     select: {
@@ -49,6 +72,7 @@ export async function getUserKarma() {
     orderBy: {
       karma: "desc",
     },
+    take: 10,
   });
   return users;
 }
