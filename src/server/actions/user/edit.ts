@@ -30,12 +30,6 @@ export async function editMultiple({ formData }: { formData: FormData }) {
   const name = formData.get("name") as string;
   const username = formData.get("username") as string;
   const bio = formData.get("bio") as string;
-  console.log({
-    userId,
-    name,
-    username,
-    bio,
-  });
   const user = await prisma.user.update({
     where: {
       id: userId,
