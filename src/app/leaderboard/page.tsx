@@ -4,7 +4,7 @@ import { getUserKarma } from "@/server/actions/user/get";
 const Leaderboard = async () => {
   const users = await getUserKarma();
   return (
-    <div className="container-custom-xs py-8 px-4 lg:px-0">
+    <div className="container-custom-xs py-8 px-4 lg:px-0 min-h-screen">
       <h1 className="text-2xl font-semibold">Leaderboard</h1>
       <p>Top 10 users with the most tomo points!</p>
       <ul className="flex flex-col gap-4 my-8">
@@ -21,7 +21,9 @@ const Leaderboard = async () => {
               />
               <div className="wrapper flex flex-1 items-center">
                 <div className="left">
-                  <h1 className="text-xl font-semibold leading-none">{user.name}</h1>
+                  <h1 className="text-xl font-semibold leading-none">
+                    {user.name}
+                  </h1>
                   <p className="text-gray-500">@{user.username}</p>
                 </div>
                 <div className="right ml-auto">
