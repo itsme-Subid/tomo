@@ -24,7 +24,20 @@ export async function getPostsWithUser() {
     },
     orderBy: {
       postedAt: "desc",
-    }
+    },
+  });
+
+  return posts;
+}
+
+export async function getPosts(userId: string) {
+  const posts = await prisma.post.findMany({
+    where: {
+      authorId: userId,
+    },
+    orderBy: {
+      postedAt: "desc",
+    },
   });
 
   return posts;

@@ -1,16 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import { Prisma } from "@prisma/client";
-
+import UpvoteComponent from "./upvote";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import deletePost from "@/server/actions/post/delete";
 import DeleteButton from "./deleteButton";
-import LikeButton from "./likeButton";
 import {
   addUpvote,
   hasUpvoted,
   removeUpvote,
 } from "@/server/actions/post/upvote";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import TimeFormatter from "./timeFormatter";
 
 type PostWithAuthor = Prisma.PostGetPayload<{
@@ -22,24 +21,6 @@ const PostComponent = async ({ post }: { post: PostWithAuthor }) => {
   const handleDelete: () => Promise<void> = async () => {
     "use server";
     await deletePost({ postId: post.id });
-  };
-  const isLiked = await hasUpvoted({
-    postId: post.id,
-    userId: session?.user?.id as string,
-  });
-  const handleLike = async () => {
-    "use server";
-    await addUpvote({
-      postId: post.id,
-      userId: session?.user?.id as string,
-    });
-  };
-  const handleDislike = async () => {
-    "use server";
-    await removeUpvote({
-      postId: post.id,
-      userId: session?.user?.id as string,
-    });
   };
   return (
     <div className="flex flex-col gap-2 py-4 px-2 w-full max-h-max">
@@ -76,11 +57,7 @@ const PostComponent = async ({ post }: { post: PostWithAuthor }) => {
         )}
       </div>
       <div className="flex gap-2 pl-10">
-        <LikeButton
-          isLiked={isLiked}
-          handleLike={handleLike}
-          handleDislike={handleDislike}
-        />
+        <UpvoteComponent post={post} session={session} />
       </div>
     </div>
   );
