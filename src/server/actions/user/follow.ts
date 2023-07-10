@@ -13,7 +13,7 @@ export async function followUser({
   const follow = await prisma.user.update({
     where: { id: userId },
     data: {
-      following: {
+      followers: {
         connect: {
           id: followId,
         },
@@ -36,7 +36,7 @@ export async function UnfollowUser({
   const unfollow = await prisma.user.update({
     where: { id: userId },
     data: {
-      following: {
+      followers: {
         disconnect: {
           id: followId,
         },

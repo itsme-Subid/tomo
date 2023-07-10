@@ -49,12 +49,16 @@ const Header = ({ session }: { session?: Session | null }) => {
                 alt=""
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="p-2">
-              <h3 className="text-base font-semibold">{session?.user.name}</h3>
-              <p className="text-sm text-zinc-400">{session?.user.email}</p>
+            <DropdownMenuContent align="end" className="p-2 w-[15rem]">
+              <div className="user-details p-2">
+                <h3 className="text-base font-semibold">
+                  {session?.user.name}
+                </h3>
+                <p className="text-sm text-zinc-400">{session?.user.email}</p>
+              </div>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="cursor-pointer outline-none focus:ring-1 ring-zinc-300 rounded-sm">
-                <div className="flex gap-2 p-2">
+              <DropdownMenuItem className="cursor-pointer outline-none hover:bg-zinc-200 rounded-sm">
+                <Link href={"/edit"} className="flex gap-2 p-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -74,11 +78,11 @@ const Header = ({ session }: { session?: Session | null }) => {
                       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                  <span>Settings</span>
-                </div>
+                  <span>Edit</span>
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer outline-none focus:ring-1 ring-zinc-300 rounded-sm">
-                <Link href={"/feed"} className="flex gap-2 p-2">
+              <DropdownMenuItem className="cursor-pointer outline-none hover:bg-zinc-200 rounded-sm">
+                <Link href={"/feed"} className="flex gap-2 p-2 w-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -96,27 +100,25 @@ const Header = ({ session }: { session?: Session | null }) => {
                   <span>Create</span>
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer outline-none focus:ring-1 ring-zinc-300 rounded-sm">
-                <Link href={"/leaderboard"} className="flex gap-2 p-2">
+              <DropdownMenuItem className="cursor-pointer outline-none hover:bg-zinc-200 rounded-sm">
+                <Link href={"/leaderboard"} className="flex gap-2 p-2 w-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
+                    width="32"
+                    height="32"
                     viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
                     className="w-6 h-6"
                   >
                     <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                      fill="#000"
+                      d="M4 11v8h4v-8H4Zm6-6v14h4V5h-4Zm6 8v6h4v-6h-4Zm4 8H4q-.825 0-1.413-.588T2 19v-8q0-.825.588-1.413T4 9h4V5q0-.825.588-1.413T10 3h4q.825 0 1.413.588T16 5v6h4q.825 0 1.413.588T22 13v6q0 .825-.588 1.413T20 21Z"
                     />
                   </svg>
                   <span>Leaderboard</span>
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer outline-none focus:ring-1 ring-zinc-300 rounded-sm">
-                <Link href={"/profile"} className="flex gap-2 p-2">
+              <DropdownMenuItem className="cursor-pointer outline-none hover:bg-zinc-200 rounded-sm">
+                <Link href={"/profile"} className="flex gap-2 p-2 w-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

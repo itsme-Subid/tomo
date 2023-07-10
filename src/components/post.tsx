@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import deletePost from "@/server/actions/post/delete";
 import DeleteButton from "./deleteButton";
+import Link from "next/link";
 import TimeFormatter from "./timeFormatter";
 
 type PostWithAuthor = Prisma.PostGetPayload<{
@@ -20,11 +21,13 @@ const PostComponent = async ({ post }: { post: PostWithAuthor }) => {
   return (
     <div className="flex flex-col gap-2 py-4 px-2 w-full max-h-max">
       <div className=" flex gap-2">
-        <img
-          src={post.author.image as string}
-          alt={"avatar"}
-          className="w-8 h-8 rounded-full"
-        />
+        <Link href={`/user/${post.author.username}`} className="w-10 h-10">
+          <img
+            src={post.author.image as string}
+            alt={"avatar"}
+            className="w-8 h-8 rounded-full"
+          />
+        </Link>
         <div className="flex justify-between w-full">
           <div className="left flex flex-col gap-1">
             <span className="font-semibold leading-none">
@@ -41,7 +44,7 @@ const PostComponent = async ({ post }: { post: PostWithAuthor }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-1 pl-10">
+      <div className="flex flex-col gap-1 pl-12">
         <p>{post.content}</p>
         {post.image && (
           <img

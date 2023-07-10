@@ -7,6 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 const DeleteButton = ({
   handleDelete,
@@ -33,15 +34,40 @@ const DeleteButton = ({
           />
         </svg>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="p-2">
+      <DropdownMenuContent align="end" className="p-1">
         <DropdownMenuItem
-          className="p-2 cursor-pointer"
+          className="p-2 cursor-pointer outline-none rounded-sm flex gap-2 hover:bg-rose-200 transition-colors duration-300"
           onClick={async () => {
-            await handleDelete();
-            router.refresh();
+            let id = toast.loading("Deleting post...", {
+              position: "bottom-right",
+            });
+            try {
+              await handleDelete();
+              router.refresh();
+              toast.success("Post deleted", {
+                id,
+              });
+            } catch (err) {
+              toast.error("Error deleting post", {
+                id,
+              });
+              return;
+            }
           }}
         >
-          Delete
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            className="w-6 h-6"
+          >
+            <path
+              fill="#000"
+              d="M7 21q-.825 0-1.413-.588T5 19V6q-.425 0-.713-.288T4 5q0-.425.288-.713T5 4h4q0-.425.288-.713T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5q0 .425-.288.713T19 6v13q0 .825-.588 1.413T17 21H7ZM7 6v13h10V6H7Zm2 10q0 .425.288.713T10 17q.425 0 .713-.288T11 16V9q0-.425-.288-.713T10 8q-.425 0-.713.288T9 9v7Zm4 0q0 .425.288.713T14 17q.425 0 .713-.288T15 16V9q0-.425-.288-.713T14 8q-.425 0-.713.288T13 9v7ZM7 6v13V6Z"
+            />
+          </svg>
+          <span>Delete</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

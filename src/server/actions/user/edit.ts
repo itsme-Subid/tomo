@@ -25,17 +25,17 @@ export async function changeUsername({
   return user;
 }
 
-export async function editMultiple({
-  userId,
-  bio,
-  avatar,
-  name,
-}: {
-  userId: string;
-  bio?: string;
-  avatar?: string;
-  name?: string;
-}) {
+export async function editMultiple({ formData }: { formData: FormData }) {
+  const userId = formData.get("userId") as string;
+  const name = formData.get("name") as string;
+  const username = formData.get("username") as string;
+  const bio = formData.get("bio") as string;
+  console.log({
+    userId,
+    name,
+    username,
+    bio,
+  });
   const user = await prisma.user.update({
     where: {
       id: userId,
@@ -43,7 +43,7 @@ export async function editMultiple({
     // change only the fields that are not undefined
     data: {
       ...(bio && { bio }),
-      ...(avatar && { avatar }),
+      ...(username && { username }),
       ...(name && { name }),
     },
   });
